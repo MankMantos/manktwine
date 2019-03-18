@@ -7,12 +7,30 @@
 	},
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "nyc mocha --recursive"
 	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/MankMantos/manktwine"
 	},
 	"author": "",
-	"license": "ISC"
+	"license": "ISC",
+	"devDependencies": {
+		"chai": "^4.2.0",
+		"eslint": "^5.15.2",
+		"eslint-config-google": "^0.12.0",
+		"mocha": "^6.0.2",
+		"nyc": "^13.3.0",
+		"sinon": "^7.2.7",
+		"chai-as-promised": "^7.1.1",
+		"dirty-chai": "^2.0.1"
+	},
+	"dependencies": {
+		"axios": "^0.18.0",
+		"commander": "^2.19.0",
+		"configstore": "^4.0.0",
+		"inquirer": "^6.2.2",
+		"keytar": "^4.4.1",
+		"oauth-1.0a": "^2.2.5"
+	}
 }
