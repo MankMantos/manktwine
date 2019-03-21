@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const chai = require('chai');
 const expect = chai.expect;
@@ -13,19 +13,52 @@ describe('a credential manager', () => {
         creds = new CredentialManager('twine-test');
     });
 
+    it('should return credentials set in the environment', async () => {
+        process.env['TWINE-TEST_CONSUMER_KEY'] = 'one';
+        process.env['TWINE-TEST_CONSUMER_SECRET'] = 'two';
+        let [key, secret] = await creds.getKeyAndSecret('consumer');
+        expect(key).to.equal('one');
+        expect(secret).to.equal('two');
+    });
+
+    it('should prefer credentials set in the environemnt', async () => {
+        await creds.storeKeyAndSecret('consumer', 'foo', 'bar');
+        let [key, secret] = await creds.getKeyAndSecret('consumer');
+        expect(key).to.equal('one');
+        expect(secret).to.equal('two');
+        delete process.env['TWINE-TEST_CONSUMER_KEY'];
+        delete process.env['TWINE-TEST_CONSUMER_SECRET'];
+    });
+
     it('should return credentials when they are found', async () => {
-        await creds.storeKeyAndSecret('foo', 'bar');
-        let [key, secret] = await creds.getKeyAndSecret();
+        await creds.storeKeyAndSecret('consumer', 'foo', 'bar');
+        let [key, secret] = await creds.getKeyAndSecret('consumer');
         expect(key).to.equal('foo');
         expect(secret).to.equal('bar');
     });
 
-    it('should reject when no credentials are found', async () => {
-        await creds.clearKeyAndSecret();
-        expect(creds.getKeyAndSecret()).to.be.rejected;
+    it('should reject when no keys are found', async () => {
+        await creds.clearKeyAndSecret('consumer');
+        expect(creds.getKeyAndSecret('consumer')).to.be.rejectedWith('Missing consumer key');
     });
 
-    after( (done) => {
-        fs.unlink(path.join(process.env.HOME, '.config', 'configstore', 'twine-test.json'), done)
+    it('should reject when no secret is found', async () => {
+        creds.conf.set('keys.consumer', 'foo');
+        await expect(creds.getKeyAndSecret('consumer')).to.be.rejectedWith('Missing consumer secret');
+        creds.conf.delete('keys.consumer')
+    });
+
+    it('should remove all credentials', async () => {
+        await creds.storeKeyAndSecret('consumer', 'one', 'two');
+        await creds.storeKeyAndSecret('consumer', 'threee', 'four');
+        await creds.clearAll();
+        await expect(creds.getKeyAndSecret('consumer')).to.be.rejected;
+        await expect(creds.getKeyAndSecret('consumer')).to.be.rejected;
+
+    });
+
+    after( async () => {
+        await creds.clearAll();
+        await fs.unlink(path.join(process.env.HOME, '.config', 'configstore', 'twine-test.json'))
     });
 });

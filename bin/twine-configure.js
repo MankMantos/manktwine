@@ -1,6 +1,7 @@
 const commander = require('commander');
 const pkg = require('../package.json');
 const configure = require('../commands/configure');
+const util = require('../lib/util');
 
 commander
     .version(pkg.version)
@@ -8,9 +9,12 @@ commander
 commander
     .command('consumer')
     .description('Add a Twitter API key and secret')
-    .action( async () => {
-        await configure.consumer(pkg.name);
-    })
+    .action( () => configure.consumer(pkg.name).catch(util.handleError))
+
+commander
+    .command('account')
+    .description('Authorize access to a twitter account')
+    .action( () => configure.account(pkg.name).catch(util.handleError));
 commander
     .parse(process.argv)
 

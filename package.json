@@ -17,20 +17,23 @@
 	"license": "ISC",
 	"devDependencies": {
 		"chai": "^4.2.0",
+		"chai-as-promised": "^7.1.1",
+		"dirty-chai": "^2.0.1",
 		"eslint": "^5.15.2",
 		"eslint-config-google": "^0.12.0",
+		"fs-extra": "^7.0.1",
 		"mocha": "^6.0.2",
 		"nyc": "^13.3.0",
-		"sinon": "^7.2.7",
-		"chai-as-promised": "^7.1.1",
-		"dirty-chai": "^2.0.1"
+		"sinon": "^7.2.7"
 	},
 	"dependencies": {
-		"axios": "^0.18.0",
+		"axios": "^0.17.0",
+		"chalk": "^2.4.2",
 		"commander": "^2.19.0",
 		"configstore": "^4.0.0",
 		"inquirer": "^6.2.2",
 		"keytar": "^4.4.1",
-		"oauth-1.0a": "^2.2.5"
+		"oauth-1.0a": "^2.2.4",
+		"opn": "^5.5.0"
 	}
 }
