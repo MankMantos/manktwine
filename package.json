@@ -1,6 +1,6 @@
 {
-	"name": "@mank/manktwine-cli",
-	"version": "1.0.0",
+	"name": "@mankmantos/manktwine-cli",
+	"version": "1.0.1",
 	"description": "",
 	"bin": {
 		"twine": "./bin/twine.js"

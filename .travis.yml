@@ -3,4 +3,12 @@ node_js: lts/dubnium
 addons:
   apt:
     packages:
-      - libsecret-1-0
+    - libsecret-1-0
+deploy:
+  provider: npm
+  email: piwamaker@gmail.com
+  api_key:
+    secure: dfeuYQQxLdQ+qAedk77661N3kX0zqQxKmgEEGeHSPphZllk2ctnDD0j22ZmgI3EDJTri6wnGFbu4oFHNWEptpdYqI4D24UpQ+cx1ASMogtH2+yTFTVmkkMOSkOwwxE+O7kHQfZNA8gJ1GGB29289iVNoIpYc+JKFpYS5mfKYx6rn4dK7ENtA8gwn083/vLmtnWOmEiKhSVWAie7SF4j+fetTcz3kCV1V5JyE1NzJ8lkZ13g2NgHfssCuEQDTeiXIwGhVJ/sIVs5l6fYsFsmY+6Ozm+Giwe0fbp4MAZf/QvqeeSQmeuvuUnyKk/CaeU3VnjAgigf3ux2US07Bt3k2ZOoPJe6WcqMGqKNrhtEBdtIw6le2+mRc8p7Pft6p7w0kzQV3+k/sFe3nd7XOIJqwj0CfNxyAVFlFPjd54T7O4U9qtrvXt8HJicXu/hmQn2HKPtsm2P2kURXUyMHLkW2G7Q/1bip3iEO5n7IElR1J4iyj64ZZJJZ/WW1ysslU+5rFGS7qGmk0DaRD/2ZpSzbjarKDM1OWeffwkS8XujPWNi1Oa6nnCmm2cAVOWpUu1cMgz9LAd/0irRHHFRICHRuqnko4mzkWZxy7PkfaIy/Aslr0tUFHxBY7ZHxdrxuWf8iMOXJ6/hEmu03O1Ru1Eq2ea3FxQ6RK3Zrq34IQ9qUOVXc=
+  on:
+    tags: true
+    repo: MankMantos/manktwine
