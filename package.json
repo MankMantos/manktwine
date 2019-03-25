@@ -38,6 +38,7 @@
 		"from2-array": "0.0.4",
 		"inquirer": "^6.2.2",
 		"keytar": "^4.4.1",
+		"lodash": "^4.17.11",
 		"oauth-1.0a": "^2.2.4",
 		"opn": "^5.5.0",
 		"parallel-transform": "^1.1.0",

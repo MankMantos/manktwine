@@ -5,17 +5,34 @@ const expect = chai.expect;
 const dirtyChai = require('dirty-chai');
 const sinon = require('sinon');
 const inquirer = require('inquirer');
+const keytar = require('keytar');
+const _ = require('lodash');
 const configure = require('../../commands/configure');
 const CredentialManager = require('../../lib/credential-manager');
 const Twitter = require('../../lib/twitter');
 const util = require('../../lib/util');
 
 describe('the configure module', () => {
+    let secrets = {};
     let creds;
     let sandbox;
     before(() => {
-        creds = new CredentialManager('twine-test');
+        sinon.stub(keytar, 'setPassword').callsFake((service, key, secret) => {
+            _.set(secrets, `${service}.${key}`, secret);
+            return Promise.resolve();
+        });
 
+        sinon.stub(keytar, 'getPassword').callsFake((service, key) => {
+            let value = _.get(secrets, `${service}.${key}`);
+            return value ? Promise.resolve(value) : Promise.reject('Missing consumer secret');
+        });
+
+        sinon.stub(keytar, 'deletePassword').callsFake((service, key) => {
+            _.unset(secrets, `${service}.${key}`);
+            return Promise.resolve();
+        });
+
+        creds = new CredentialManager('twine-test');
     });
 
     beforeEach( () => {
@@ -75,6 +92,9 @@ describe('the configure module', () => {
 
     after( async () => {
         await creds.clearAll();
+        keytar.setPassword.restore();
+        keytar.getPassword.restore();
+        keytar.deletePassword.restore();
         await fs.unlink(path.join(process.env.HOME, '.config', 'configstore', 'twine-test.json'))
     });
 });

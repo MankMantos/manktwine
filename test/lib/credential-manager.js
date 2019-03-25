@@ -1,4 +1,7 @@
 const fs = require('fs-extra');
+const keytar = require('keytar');
+const sinon = require('sinon');
+const _ = require('lodash');
 const path = require('path');
 const chai = require('chai');
 const expect = chai.expect;
@@ -8,8 +11,24 @@ const CredentialManager = require('../../lib/credential-manager');
 chai.use(chaiAsPromised);
 
 describe('a credential manager', () => {
+    let secrets = {};
     let creds;
     before(() => {
+        sinon.stub(keytar, 'setPassword').callsFake((service, key, secret) => {
+            _.set(secrets, `${service}.${key}`, secret);
+            return Promise.resolve();
+        });
+
+        sinon.stub(keytar, 'getPassword').callsFake((service, key) => {
+            let value = _.get(secrets, `${service}.${key}`);
+            return value ? Promise.resolve(value) : Promise.reject('Missing consumer secret');
+        });
+
+        sinon.stub(keytar, 'deletePassword').callsFake((service, key) => {
+            _.unset(secrets, `${service}.${key}`);
+            return Promise.resolve();
+        });
+
         creds = new CredentialManager('twine-test');
     });
 
@@ -59,6 +78,9 @@ describe('a credential manager', () => {
 
     after( async () => {
         await creds.clearAll();
+        keytar.setPassword.restore();
+        keytar.getPassword.restore();
+        keytar.deletePassword.restore();
         await fs.unlink(path.join(process.env.HOME, '.config', 'configstore', 'twine-test.json'))
     });
 });
