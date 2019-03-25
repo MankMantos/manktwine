@@ -22,7 +22,7 @@ deploy:
     skip_cleanup: true
     on:
       tags: true
-      repo: mankmantos/manktwine-cli
+      repo: MankMantos/manktwine
 env:
   global:
   - secure: cg1r0EzP13RfJBlwk0r8anPG0C4eLJzZdctM2rxzGJJB4kNwkd46Dk2TN3boGy54Q5U0chidJLqNcUIMYgyn4frw2oZI2QC2DvL0FgI9Fc3gCC9B/r1b6lWaokCs6OnjA5Dv/lZMRwcr9wQUV9WZlfVo0//koV7APBqZXIqKaJYMj3uFMM2U4mi0Sxt/jrpjCb4etwYobxvjs2ES3UYCLPXNj+HnYKsNHuFmy95VmFOAFLl9cnjdEmoFNcR1WgkuDspEBTrMrJBzdUXsOQxa1dTQKQPL0yi/QPlyquyjEkrR/Ya1pmY8lLMPboNGMx0+7k0ygdYKUFsuydBEhAdvZaUpaWOY22ZY9a7Ekz1qxEcexu+tdzyiUbZQMcBdtZhxUumfHhu/3iXM56onB67TCQVLR6DgzFfMzTVq4/a6vh3T0ITxDl1jg4MHlsP7eiFAQ5j0EEkM9A+5NXNuGRV/9fRCJdNuyaep+skzkqMh6C3B194N0GOsiu030Pm/wm4NtpVnQV5ETkRwiIgH+ksWKWhT0xT1GURXbsHfKlPJTmtvqidvhuCuZ5PL0WQNvtKyFa8eaR1/XW6zKXBdQqdeyNs+eIFIiHANrwzwHJnIPA2UMg46AyVZJ6BxHoLrkgSOOxV2JSdfGc2K/9wE17IF7oV8EghXpyx0DltB98y/Kmg=
