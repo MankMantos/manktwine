@@ -9,12 +9,12 @@ commander
 commander
     .command('consumer')
     .description('Add a Twitter API key and secret')
-    .action( () => configure.consumer(pkg.name).catch(util.handleError))
+    .action( () => util.exractName(configure.consumer(pkg.name)).catch(util.handleError))
 
 commander
     .command('account')
     .description('Authorize access to a twitter account')
-    .action( () => configure.account(pkg.name).catch(util.handleError));
+    .action( () => util.exractName(configure.consumer(pkg.name)).catch(util.handleError));
 commander
     .parse(process.argv)
 

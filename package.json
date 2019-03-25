@@ -1,13 +1,15 @@
 {
-	"name": "manktwine-cli",
+	"name": "@mank/manktwine-cli",
 	"version": "1.0.0",
 	"description": "",
 	"bin": {
 		"twine": "./bin/twine.js"
 	},
-	"main": "index.js",
 	"scripts": {
 		"test": "nyc mocha --recursive"
+	},
+	"publishConfig": {
+		"access": "public"
 	},
 	"repository": {
 		"type": "git",
@@ -24,16 +26,23 @@
 		"fs-extra": "^7.0.1",
 		"mocha": "^6.0.2",
 		"nyc": "^13.3.0",
-		"sinon": "^7.2.7"
+		"sinon": "^7.2.7",
+		"stream-mock": "^1.2.0"
 	},
 	"dependencies": {
+		"JSONStream": "^1.3.5",
 		"axios": "^0.17.0",
 		"chalk": "^2.4.2",
 		"commander": "^2.19.0",
 		"configstore": "^4.0.0",
+		"from2-array": "0.0.4",
 		"inquirer": "^6.2.2",
 		"keytar": "^4.4.1",
 		"oauth-1.0a": "^2.2.4",
-		"opn": "^5.5.0"
+		"opn": "^5.5.0",
+		"parallel-transform": "^1.1.0",
+		"promise-streams": "^2.1.1",
+		"split2": "^3.1.1",
+		"through2": "^3.0.1"
 	}
 }
