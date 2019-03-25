@@ -62,5 +62,4 @@ typings/
 
 .travis.yml
 test
-scripts
 env.list
